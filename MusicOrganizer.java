@@ -180,6 +180,24 @@ public class MusicOrganizer
      * then plays it
      */
     public void playRandTrack(){
-        playTrack(randSelector.nextInt(tracks.size()));
+        playTrack(randSelector.nextInt(getNumberOfTracks()));
+    }
+    
+    /**
+     * This method plays every track in the track ist exactly once, in random order
+     */
+    public void playShuffledList(){
+        int number;
+        ArrayList<Track> tracks2 = new ArrayList<>();
+        for (Track copy : tracks){
+            tracks2.add(copy);
+        }
+        while (tracks2.size()>0){
+            number = randSelector.nextInt(tracks2.size());
+            Track track = tracks2.get(number);
+            player.playSample(track.getFilename());
+            System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
+            tracks2.remove(number);
+        }
     }
 }
